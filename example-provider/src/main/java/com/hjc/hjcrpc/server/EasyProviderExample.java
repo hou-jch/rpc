@@ -1,8 +1,7 @@
 package com.hjc.hjcrpc.server;
 
 import com.hjc.example.common.service.UserService;
-import com.hjc.hjcrpc.server.registry.LocalRegistry;
-import lombok.val;
+import com.hjc.hjcrpc.registry.LocalRegistry;
 
 public class EasyProviderExample {
     public static void main(String[] args) {

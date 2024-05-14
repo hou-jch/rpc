@@ -1,4 +1,4 @@
-package com.hjc.hjcrpc.server.serializer;
+package com.hjc.hjcrpc.serializer;
 
 import java.io.IOException;
 

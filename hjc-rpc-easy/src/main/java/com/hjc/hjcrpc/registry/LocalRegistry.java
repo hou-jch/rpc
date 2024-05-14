@@ -1,4 +1,4 @@
-package com.hjc.hjcrpc.server.registry;
+package com.hjc.hjcrpc.registry;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
