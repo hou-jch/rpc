@@ -13,6 +13,7 @@
         <module>example-consumer</module>
         <module>example-provider</module>
         <module>hjc-rpc-easy</module>
+        <module>hjc-rpc-core</module>
     </modules>
 
     <properties>
