@@ -1,6 +1,9 @@
 package com.hjc.example.common.model.example.consumer;
 
+import com.hjc.example.common.service.UserService;
 import com.hjc.hjcrpc.config.RpcConfig;
+import com.hjc.hjcrpc.proxy.ServiceProxy;
+import com.hjc.hjcrpc.proxy.ServiceProxyFactory;
 import com.hjc.hjcrpc.utils.ConfigUtils;
 
 /**
@@ -12,8 +15,10 @@ import com.hjc.hjcrpc.utils.ConfigUtils;
 public class ConsumerExample {
 
     public static void main(String[] args) {
-        RpcConfig rpc = ConfigUtils.loadConfig(RpcConfig.class, "rpc");
-        System.out.println(rpc);
+//        RpcConfig rpc = ConfigUtils.loadConfig(RpcConfig.class, "rpc");
+//        System.out.println(rpc);
+
+
 
     }
 }

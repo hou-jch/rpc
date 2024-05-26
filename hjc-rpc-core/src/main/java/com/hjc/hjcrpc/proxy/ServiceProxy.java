@@ -3,14 +3,18 @@ package com.hjc.hjcrpc.proxy;
 import cn.hutool.http.HttpRequest;
 import cn.hutool.http.HttpResource;
 import cn.hutool.http.HttpResponse;
+import com.hjc.hjcrpc.RpcApplication;
 import com.hjc.hjcrpc.model.RpcRequest;
 import com.hjc.hjcrpc.model.RpcResponse;
 import com.hjc.hjcrpc.serializer.JdkSerializer;
 import com.hjc.hjcrpc.serializer.Serializer;
+import com.hjc.hjcrpc.serializer.SerializerFactory;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
+
+import static com.hjc.hjcrpc.serializer.SerializerFactory.getInstance;
 
 /**
  * 服务代理（JDK动态代理）
@@ -40,10 +44,13 @@ public class ServiceProxy implements InvocationHandler {
      * @return
      * @throws Throwable
      */
+
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         //指定序列化器
-        Serializer serializer = new JdkSerializer();
+
+
+        final Serializer serializer = SerializerFactory.getInstance(RpcApplication.getRpcConfig().getSerializer());
         //构造请求
         RpcRequest rpcRequest = RpcRequest.builder()
                 .serviceName(method.getDeclaringClass().getName())
@@ -62,7 +69,7 @@ public class ServiceProxy implements InvocationHandler {
                  //对于资源管理，这种语法提升了代码的简洁性和可读性。不需要显式地在 finally 块中关闭资源，编译器会生成相应的代码来确保资源关闭。
         //处理自动关闭异常:
                         //如果 close() 方法在关闭资源时抛出异常，try-with-resources 块会处理这种情况，并确保任何正常的抛出也会被抛出和捕获。
-        try(HttpResponse httpResponse = HttpRequest.post("http://localhost:8081")
+        try(HttpResponse httpResponse = HttpRequest.post("http://localhost:8080")
                     .body(serialize)
                     .execute()) {
             RpcResponse rpcResponse = serializer.deserialize(httpResponse.bodyBytes(), RpcResponse.class);

@@ -6,11 +6,13 @@ package com.hjc.hjcrpc.server;
  * Date: 2024/5/14
  */
 
+import com.hjc.hjcrpc.RpcApplication;
 import com.hjc.hjcrpc.model.RpcRequest;
 import com.hjc.hjcrpc.model.RpcResponse;
 import com.hjc.hjcrpc.registry.LocalRegistry;
 import com.hjc.hjcrpc.serializer.JdkSerializer;
 import com.hjc.hjcrpc.serializer.Serializer;
+import com.hjc.hjcrpc.serializer.SerializerFactory;
 import io.vertx.core.Handler;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.http.HttpServerRequest;
@@ -29,7 +31,7 @@ public class HttpServerHandler implements Handler<HttpServerRequest> {
     @Override
     public void handle(HttpServerRequest httpServerRequest) {
         //指定序列化器
-        final Serializer serializer = new JdkSerializer();
+        final Serializer serializer = SerializerFactory.getInstance(RpcApplication.getRpcConfig().getSerializer());
         //输出
         System.out.println("received request: " + httpServerRequest.method() + " " + httpServerRequest.uri());
         //异步处理HTTP请求

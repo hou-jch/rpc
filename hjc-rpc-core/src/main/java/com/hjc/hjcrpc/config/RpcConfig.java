@@ -1,5 +1,6 @@
 package com.hjc.hjcrpc.config;
 
+import com.hjc.hjcrpc.serializer.SerializerKeys;
 import lombok.Data;
 
 /**
@@ -37,5 +38,11 @@ public  class RpcConfig {
      */
 
     private Boolean mock = false;
+
+    /**
+     * 序列化器
+     */
+    private String serializer = SerializerKeys.JDK;
+
 
 }
