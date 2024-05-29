@@ -15,7 +15,7 @@ import static cn.hutool.core.lang.Singleton.put;
  */
 public class SerializerFactory {
 
-    private static Map <String,Class<?>> instance;
+//    private static Map <String,Class<?>> instance;
 //    /**
 //     * 序列化映射(用于实现单例）
 //     */
@@ -27,16 +27,17 @@ public class SerializerFactory {
 //        put(SerializerKeys.HESSIAN,new HessianSerializer());
 //    }}
 
-    private SerializerFactory(){}
-    public static void getInstance(){
-
-    }
-
+//    private SerializerFactory(){}
+//    public static void getInstance(){
+//    }
+static {
+    SpiLoader.load(Serializer.class);
+}
 
     /**
      * 默认序列化器
      */
-//    private static final Serializer DEFAULT_SERIALIZER = new JdkSerializer();
+    private static final Serializer DEFAULT_SERIALIZER = new JdkSerializer();
 
     /**
      * 获取实例
@@ -44,13 +45,13 @@ public class SerializerFactory {
      * @return
      */
     public static Serializer getInstance(String key){
-        if(instance == null){
-            synchronized (SerializerFactory.class){
-                if (instance == null){
-                    instance = SpiLoader.load(Serializer.class);
-                }
-            }
-        }
+//        if(instance == null){
+//            synchronized (SerializerFactory.class){
+//                if (instance == null){
+//                    instance = SpiLoader.load(Serializer.class);
+//                }
+//            }
+//        }
         System.out.println(key);
         return SpiLoader.getInstance(Serializer.class,key);
     }

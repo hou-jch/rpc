@@ -1,5 +1,6 @@
 package com.hjc.hjcrpc.model;
 
+import com.hjc.hjcrpc.constant.RpcConstant;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -32,4 +33,6 @@ public class RpcRequest implements Serializable {
      * 参数列表
      */
     private Object[] args;
+
+    private String serviceVersion = RpcConstant.DEFAULT_SERVICE_VERSION;
 }

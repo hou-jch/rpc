@@ -93,6 +93,7 @@ public class SpiLoader {
             try {
                 //Class<?>不是一个真正的实例对象，而是描述类本身的元数据。
                 //newInstance():实际触发调用 implClass 的无参数构造函数，返回的是 implClass 这个类的一个新实例。
+                System.out.println(implClass.newInstance());
                 instanceCache.put(implClassName, implClass.newInstance());
             } catch (InstantiationException | IllegalAccessException e) {
               String errorMsg = String.format("%s 类实例化失败",implClassName);

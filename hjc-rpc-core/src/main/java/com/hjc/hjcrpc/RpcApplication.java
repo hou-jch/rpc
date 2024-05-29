@@ -6,8 +6,11 @@ package com.hjc.hjcrpc;
  * Date: 2024/5/15
  */
 
+import com.hjc.hjcrpc.config.RegistryConfig;
 import com.hjc.hjcrpc.config.RpcConfig;
 import com.hjc.hjcrpc.constant.RpcConstant;
+import com.hjc.hjcrpc.registry.Registry;
+import com.hjc.hjcrpc.registry.RegistryFactory;
 import com.hjc.hjcrpc.utils.ConfigUtils;
 import lombok.extern.slf4j.Slf4j;
 
@@ -24,6 +27,11 @@ public class RpcApplication {
     public static void init(RpcConfig newRpcConfig) {
         rpcConfig = newRpcConfig;
         log.info("rpc init,config = {}", newRpcConfig.toString());
+        //注册中心初始化
+        RegistryConfig registryConfig = rpcConfig.getRegistryConfig();
+        Registry registry = RegistryFactory.getInstance(registryConfig.getRegistry());
+        registry.init(registryConfig);
+        log.info("registry init,config = {}",registryConfig);
     }
 
     /**
