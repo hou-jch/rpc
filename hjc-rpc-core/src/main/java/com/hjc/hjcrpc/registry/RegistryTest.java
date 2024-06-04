@@ -70,4 +70,10 @@ public class RegistryTest {
 
     }
 
+    @Test
+    public void heartBeat() throws ExecutionException, InterruptedException {
+        register();
+        Thread.sleep(60*1000L);
+    }
+
 }

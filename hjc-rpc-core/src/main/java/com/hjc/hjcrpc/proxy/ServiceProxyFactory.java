@@ -117,7 +117,7 @@ final InvocationHandler ih = h;
  包含一个 InvocationHandler 字段：这个字段用于存储传入的 InvocationHandler 实例。
  代理类的构造函数：生成的代理类包含一个构造函数，这个构造函数接受一个 InvocationHandler 参数。这个参数会被用来初始化代理类内部的 InvocationHandler 字段。
 
- 当 Proxy.newProxyInstance 方法被调用时，它会执行以下步骤：
+ 当 Proxy.newProxyInstance 方法被调用时，会执行以下步骤：
 
  生成代理类：JVM 会动态生成一个实现了 MyInterface 的代理类。这是一个运行时生成的类，通常名字是系统生成的，例如 $Proxy0。
 

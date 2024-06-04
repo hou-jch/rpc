@@ -88,7 +88,7 @@ public class SpiLoader {
         //获取到要加载的类型
         Class<?> implClass = classMap.get(key);
         String implClassName = implClass.getName();
-        if(!instanceCache.containsKey(implClass)){
+        if(!instanceCache.containsKey(implClassName)){
 
             try {
                 //Class<?>不是一个真正的实例对象，而是描述类本身的元数据。
