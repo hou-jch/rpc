@@ -2,6 +2,7 @@ package com.hjc.hjcrpc.model;
 
 import cn.hutool.core.util.StrUtil;
 import lombok.Data;
+import org.apache.curator.x.discovery.ServiceInstance;
 
 /**
  * 注册信息

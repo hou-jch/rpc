@@ -28,6 +28,7 @@ public class EasyConsumerExample {
 //        }
 
       UserService userService = getProxy(UserService.class);
+        UserService userService2 = getProxy(UserService.class);
       ColorService colorService = getProxy(ColorService.class);
         User user = new User();
         user.setName("hjc");

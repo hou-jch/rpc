@@ -30,7 +30,7 @@ public class RegistryTest {
 
 
     @Test
-    public void register() throws ExecutionException, InterruptedException {
+    public void register() throws Exception {
         ServiceMetalInfo serviceMetalInfo = new ServiceMetalInfo();
 
         ServiceMetalInfo serviceMetaInfo = new ServiceMetalInfo();
@@ -71,7 +71,7 @@ public class RegistryTest {
     }
 
     @Test
-    public void heartBeat() throws ExecutionException, InterruptedException {
+    public void heartBeat() throws Exception {
         register();
         Thread.sleep(60*1000L);
     }

@@ -30,6 +30,7 @@ public class ProviderExample {
         //注册服务
 
         String serviceName = UserService.class.getName();
+
         String serviceNames = ColorService.class.getName();
         LocalRegistry.register(serviceName, UserServiceImpl.class);
         LocalRegistry.register(serviceNames, ColorServiceImpl.class);

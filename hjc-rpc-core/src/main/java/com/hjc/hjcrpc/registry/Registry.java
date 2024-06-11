@@ -23,7 +23,7 @@ public interface Registry   {
     /**
      * 注册服务（服务端）
      */
-    void register(ServiceMetalInfo serviceMetalInfo) throws ExecutionException, InterruptedException;
+    void register(ServiceMetalInfo serviceMetalInfo) throws ExecutionException, InterruptedException, Exception;
 
     /**
      * 注销服务（服务端）
