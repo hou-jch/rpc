@@ -13,6 +13,8 @@ import com.hjc.hjcrpc.server.ColorServiceImpl;
 import com.hjc.hjcrpc.server.HttpServer;
 import com.hjc.hjcrpc.server.UserServiceImpl;
 import com.hjc.hjcrpc.server.VertxHttpServer;
+import com.hjc.hjcrpc.server.tcp.VertxTcpClient;
+import com.hjc.hjcrpc.server.tcp.VertxTcpServer;
 
 import java.util.concurrent.ExecutionException;
 
@@ -57,8 +59,10 @@ public class ProviderExample {
             throw new RuntimeException(e);
         }
         //启动web服务
-
-        HttpServer httpServer = new VertxHttpServer();
-        httpServer.doStart(RpcApplication.getRpcConfig().getServerPort());
+//        VertxTcpClient vertxTcpClient = new VertxTcpClient();
+        VertxTcpServer vertxTcpServer = new VertxTcpServer();
+        vertxTcpServer.doStart(8080);
+//        HttpServer httpServer = new VertxHttpServer();
+//        httpServer.doStart(RpcApplication.getRpcConfig().getServerPort());
     }
 }

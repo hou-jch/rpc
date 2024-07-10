@@ -28,7 +28,7 @@ public class EasyConsumerExample {
 //        }
 
       UserService userService = getProxy(UserService.class);
-        UserService userService2 = getProxy(UserService.class);
+//        UserService userService2 = getProxy(UserService.class);
       ColorService colorService = getProxy(ColorService.class);
         User user = new User();
         user.setName("hjc");
@@ -37,7 +37,7 @@ public class EasyConsumerExample {
         Color color = new Color();
         color.setColor("红色");
         Color colorServiceColor = colorService.getColor(color);
-        Thread.sleep(10000);
+//        Thread.sleep(10000);
         if(colorServiceColor != null){
             System.out.println(colorServiceColor.getName());
         }

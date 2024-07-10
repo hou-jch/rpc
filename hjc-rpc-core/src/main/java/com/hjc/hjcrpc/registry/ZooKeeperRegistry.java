@@ -43,7 +43,6 @@ public class ZooKeeperRegistry implements Registry{
      * 正在监听key的集合
      */
     private final Set<String> watchingKsySet =  new ConcurrentHashSet<>();
-
     /**
      * 根节点
      */
