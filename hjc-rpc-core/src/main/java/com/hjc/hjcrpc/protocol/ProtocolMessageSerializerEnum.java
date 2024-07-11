@@ -15,10 +15,10 @@ import java.util.stream.Collectors;
 @Getter
 public enum ProtocolMessageSerializerEnum {
 
-    JDK(0, "Jdk"),
-    JSON(1, "Json"),
-    KRYO(2, "Kryo"),
-    HESSIAN(3, "Hessian");
+    JDK(0, "jdk"),
+    JSON(1, "json"),
+    KRYO(2, "kryo"),
+    HESSIAN(3, "hessian");
 
     private final int key;
 

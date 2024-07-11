@@ -1,5 +1,7 @@
 package com.hjc.hjcrpc.config;
 
+import com.hjc.hjcrpc.fault.retry.RetryStrategyKeys;
+import com.hjc.hjcrpc.loadbalancer.LoadBalancerKeys;
 import com.hjc.hjcrpc.serializer.SerializerKeys;
 import lombok.Data;
 
@@ -49,6 +51,15 @@ public  class RpcConfig {
      */
 
     private RegistryConfig registryConfig = new RegistryConfig();
+
+    /**
+     * 负载均衡器
+     */
+    private String loadBalancer = LoadBalancerKeys.ROUND_ROBIN;
+    /**
+     * 重试策略
+     */
+     private String retryStrategy = RetryStrategyKeys.FIXED_INTERVAL;
 
 
 }

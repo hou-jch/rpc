@@ -1,0 +1,2 @@
+noRetry=com.hjc.hjcrpc.fault.retry.NoRetryStrategy
+fixedInterval=com.hjc.hjcrpc.fault.retry.FixedIntervalRetryStrategy

@@ -32,7 +32,7 @@ public class EasyConsumerExample {
       ColorService colorService = getProxy(ColorService.class);
         User user = new User();
         user.setName("hjc");
-        System.out.println(userService.getNumber());
+//        System.out.println(userService.getNumber());
         User newUser = userService.getUser(user);
         Color color = new Color();
         color.setColor("红色");

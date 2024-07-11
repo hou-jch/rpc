@@ -1,4 +1,4 @@
-Jdk=com.hjc.hjcrpc.serializer.JdkSerializer
-Kryo=com.hjc.hjcrpc.serializer.KryoSerializer
-Hessian=com.hjc.hjcrpc.serializer.HessianSerializer
-Json=com.hjc.hjcrpc.serializer.JsonSerializer
+jdk=com.hjc.hjcrpc.serializer.JdkSerializer
+kryo=com.hjc.hjcrpc.serializer.KryoSerializer
+hessian=com.hjc.hjcrpc.serializer.HessianSerializer
+json=com.hjc.hjcrpc.serializer.JsonSerializer

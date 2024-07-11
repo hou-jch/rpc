@@ -8,6 +8,10 @@ import cn.hutool.http.HttpResponse;
 import com.hjc.hjcrpc.RpcApplication;
 import com.hjc.hjcrpc.config.RpcConfig;
 import com.hjc.hjcrpc.constant.RpcConstant;
+import com.hjc.hjcrpc.fault.retry.RetryStrategy;
+import com.hjc.hjcrpc.fault.retry.RetryStrategyFactory;
+import com.hjc.hjcrpc.loadbalancer.LoadBalancer;
+import com.hjc.hjcrpc.loadbalancer.LoadBalancerFactory;
 import com.hjc.hjcrpc.model.RpcRequest;
 import com.hjc.hjcrpc.model.RpcResponse;
 import com.hjc.hjcrpc.model.ServiceMetalInfo;
@@ -25,6 +29,7 @@ import io.vertx.core.net.NetClient;
 import java.io.IOException;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
+import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
@@ -88,7 +93,13 @@ public class ServiceProxy implements InvocationHandler {
             if (CollUtil.isEmpty(serviceMetalInfoList)) {
                 throw new RuntimeException("暂无服务地址");
             }
-            ServiceMetalInfo serviceMetalInfos = serviceMetalInfoList.get(0);
+            //负载均衡
+            LoadBalancer loadBalancer = LoadBalancerFactory.getLoadBalancer(RpcApplication.getRpcConfig().getLoadBalancer());
+            HashMap<String, Object> requestParams = new HashMap<>();
+            requestParams.put("methodName",rpcRequest.getMethodName());
+            ServiceMetalInfo selectedServiceMetalInfo = loadBalancer.select(requestParams, serviceMetalInfoList);
+
+//            ServiceMetalInfo serviceMetalInfos = serviceMetalInfoList.get(0);
 
             //发送请求
 
@@ -115,12 +126,18 @@ public class ServiceProxy implements InvocationHandler {
 //
 //
 //        return null;
+            //获取重试策略
+            RetryStrategy retryStrategy = RetryStrategyFactory.getInstance(rpcConfig.getRetryStrategy());
+                RpcResponse rpcResponse = retryStrategy.doRetry(()->
+                     VertxTcpClient.doRequest(rpcRequest, selectedServiceMetalInfo)
+                );
+                return rpcResponse.getData();
 
 
-            RpcResponse rpcResponse = VertxTcpClient.doRequest(rpcRequest, serviceMetalInfos);
-            return rpcResponse.getData();
+
         }catch (IOException e){
             e.printStackTrace();
+
         }
         return null;
     }

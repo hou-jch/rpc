@@ -25,6 +25,7 @@ public class VertxTcpClient {
     public static RpcResponse doRequest(RpcRequest rpcRequest, ServiceMetalInfo serviceMetalInfo) throws ExecutionException, InterruptedException {
         Vertx vertx = Vertx.vertx();
         NetClient netClient = vertx.createNetClient();
+//CompletableFuture的设计是为了在非阻塞、异步操作中使用。直接抛出异常会导致异步代码块中断，但不会通知CompletableFuture，这使得它无法处理异常情景。因此，使用completeExceptionally是在异步任务中正确通知错误的唯一方法。
         CompletableFuture<RpcResponse> responseFuture = new CompletableFuture<>();
         netClient.connect(serviceMetalInfo.getServicePort(), serviceMetalInfo.getServiceHost(), result -> {
 
@@ -47,20 +48,24 @@ public class VertxTcpClient {
                     Buffer buffer = ProtocolMessageEncoder.encode(protocolMessage);
                     netSocket.write(buffer);
                 } catch (IOException e) {
-                    throw new RuntimeException("协议消息解码错误");
+                    responseFuture.completeExceptionally(new RuntimeException("协议消息解码错误"));
                 }
                 TcpBufferHandlerWrapper tcpBufferHandlerWrapper = new TcpBufferHandlerWrapper(buffer -> {
                     try {
                         ProtocolMessage<RpcResponse> rpcResponseProtocolMessage = (ProtocolMessage<RpcResponse>) ProtocolMessageDecoder.decode(buffer);
                         responseFuture.complete(rpcResponseProtocolMessage.getBody());
                     } catch (IOException e) {
-                        throw new RuntimeException("协议消息解码错误");
+                        responseFuture.completeExceptionally(new RuntimeException("协议消息解码错误"));
                     }
                 });
                 netSocket.handler(tcpBufferHandlerWrapper);
 
             } else {
-                System.err.println("tcp连接失败");
+                //这行代码可以触发重试策略
+                //用于显式地完成一个CompletableFuture并抛出指定的异常。当调用这个方法时，它会通知所有等待这个CompletableFuture的线程和回调函数有一个异常发生。
+                //throw new RuntimeException()：这种方式只是抛出一个异常，除非异常被捕获并传递到CompletableFuture内部。因此，直接抛出异常并不会自动传播到CompletableFuture的消费者。
+                responseFuture.completeExceptionally(new RuntimeException("Failed to connect to TCP server"));
+
             }
         });
         RpcResponse rpcResponse = responseFuture.get();
