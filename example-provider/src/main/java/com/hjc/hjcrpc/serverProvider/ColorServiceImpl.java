@@ -1,4 +1,4 @@
-package com.hjc.hjcrpc.server;
+package com.hjc.hjcrpc.serverProvider;
 
 import com.hjc.example.common.model.Color;
 import com.hjc.example.common.service.ColorService;

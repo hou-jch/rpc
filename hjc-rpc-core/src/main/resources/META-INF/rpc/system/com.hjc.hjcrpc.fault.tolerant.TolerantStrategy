@@ -1,0 +1,4 @@
+failBack=com.hjc.hjcrpc.fault.tolerant.FailBackTolerantStrategy
+failFast=com.hjc.hjcrpc.fault.tolerant.FailFastTolerantStrategy
+failOver=com.hjc.hjcrpc.fault.tolerant.FailOverTolerantStrategy
+failSafe=com.hjc.hjcrpc.fault.tolerant.FailSafeTolerantStrategy

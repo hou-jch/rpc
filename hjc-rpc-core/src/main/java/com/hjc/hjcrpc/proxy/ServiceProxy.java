@@ -10,6 +10,8 @@ import com.hjc.hjcrpc.config.RpcConfig;
 import com.hjc.hjcrpc.constant.RpcConstant;
 import com.hjc.hjcrpc.fault.retry.RetryStrategy;
 import com.hjc.hjcrpc.fault.retry.RetryStrategyFactory;
+import com.hjc.hjcrpc.fault.tolerant.TolerantStrategy;
+import com.hjc.hjcrpc.fault.tolerant.TolerantStrategyFactory;
 import com.hjc.hjcrpc.loadbalancer.LoadBalancer;
 import com.hjc.hjcrpc.loadbalancer.LoadBalancerFactory;
 import com.hjc.hjcrpc.model.RpcRequest;
@@ -126,14 +128,18 @@ public class ServiceProxy implements InvocationHandler {
 //
 //
 //        return null;
+            RpcResponse rpcResponse;
             //获取重试策略
-            RetryStrategy retryStrategy = RetryStrategyFactory.getInstance(rpcConfig.getRetryStrategy());
-                RpcResponse rpcResponse = retryStrategy.doRetry(()->
-                     VertxTcpClient.doRequest(rpcRequest, selectedServiceMetalInfo)
+            try {
+                RetryStrategy retryStrategy = RetryStrategyFactory.getInstance(rpcConfig.getRetryStrategy());
+                rpcResponse = retryStrategy.doRetry(()->
+                        VertxTcpClient.doRequest(rpcRequest, selectedServiceMetalInfo)
                 );
-                return rpcResponse.getData();
-
-
+            }catch (Exception e){
+                TolerantStrategy tolerantStrategy = TolerantStrategyFactory.getInstance(rpcConfig.getTolerantStrategy());
+                 rpcResponse = tolerantStrategy.doTolerant(null, e);
+            }
+            return rpcResponse.getData();
 
         }catch (IOException e){
             e.printStackTrace();

@@ -1,4 +1,4 @@
-package com.hjc.hjcrpc.server;
+package com.hjc.hjcrpc.serverProvider;
 
 import com.hjc.example.common.model.User;
 import com.hjc.example.common.service.UserService;

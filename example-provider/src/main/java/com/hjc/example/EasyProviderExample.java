@@ -4,7 +4,7 @@ import com.hjc.example.common.service.UserService;
 import com.hjc.hjcrpc.RpcApplication;
 import com.hjc.hjcrpc.registry.LocalRegistry;
 import com.hjc.hjcrpc.server.HttpServer;
-import com.hjc.hjcrpc.server.UserServiceImpl;
+import com.hjc.hjcrpc.serverProvider.UserServiceImpl;
 import com.hjc.hjcrpc.server.VertxHttpServer;
 
 /**

@@ -9,14 +9,10 @@ import com.hjc.hjcrpc.model.ServiceMetalInfo;
 import com.hjc.hjcrpc.registry.LocalRegistry;
 import com.hjc.hjcrpc.registry.Registry;
 import com.hjc.hjcrpc.registry.RegistryFactory;
-import com.hjc.hjcrpc.server.ColorServiceImpl;
-import com.hjc.hjcrpc.server.HttpServer;
-import com.hjc.hjcrpc.server.UserServiceImpl;
-import com.hjc.hjcrpc.server.VertxHttpServer;
-import com.hjc.hjcrpc.server.tcp.VertxTcpClient;
+import com.hjc.hjcrpc.serverProvider.ColorServiceImpl;
+import com.hjc.hjcrpc.serverProvider.UserServiceImpl;
 import com.hjc.hjcrpc.server.tcp.VertxTcpServer;
 
-import java.util.concurrent.ExecutionException;
 
 /**
  * File Description: ProviderExample
