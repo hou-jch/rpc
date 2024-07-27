@@ -7,8 +7,13 @@ import com.hjc.example.common.service.UserService;
 import com.hjc.hjcrpc.proxy.ServiceProxyFactory;
 import com.hjc.hjcrpc.serializer.KryoSerializer;
 import com.hjc.hjcrpc.spi.SpiLoader;
+import com.hjc.hjcrpc.springboot.starter.annotation.*;
 import lombok.val;
+import org.junit.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.awt.image.ColorModel;
 
 import static com.hjc.hjcrpc.proxy.ServiceProxyFactory.getProxy;
@@ -16,7 +21,12 @@ import static com.hjc.hjcrpc.proxy.ServiceProxyFactory.getProxy;
 /**
  * 建议服务消费者示例
  */
+@Service
 public class EasyConsumerExample {
+//    @RpcReference
+//    private UserService userService;
+
+
     public static void main(String[] args) throws InterruptedException {
 
 //        try {
@@ -29,18 +39,18 @@ public class EasyConsumerExample {
 
       UserService userService = getProxy(UserService.class);
 //        UserService userService2 = getProxy(UserService.class);
-      ColorService colorService = getProxy(ColorService.class);
+//      ColorService colorService = getProxy(ColorService.class);
         User user = new User();
         user.setName("hjc");
 //        System.out.println(userService.getNumber());
         User newUser = userService.getUser(user);
-        Color color = new Color();
-        color.setColor("红色");
-        Color colorServiceColor = colorService.getColor(color);
+//        Color color = new Color();
+//        color.setColor("红色");
+//        Color colorServiceColor = colorService.getColor(color);
 //        Thread.sleep(10000);
-        if(colorServiceColor != null){
-            System.out.println(colorServiceColor.getName());
-        }
+//        if(colorServiceColor != null){
+//            System.out.println(colorServiceColor.getName());
+//        }
         if(newUser != null){
             System.out.println(newUser.getName());
         }else{
@@ -51,4 +61,6 @@ public class EasyConsumerExample {
 
 
     }
+
+
 }

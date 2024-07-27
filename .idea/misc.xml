@@ -9,6 +9,8 @@
         <option value="$PROJECT_DIR$/example-consumer/pom.xml" />
         <option value="$PROJECT_DIR$/example-common/pom.xml" />
         <option value="$PROJECT_DIR$/hjc-rpc-core/pom.xml" />
+        <option value="$PROJECT_DIR$/hjc-rpc-spring-boot-starter/pom.xml" />
+        <option value="$PROJECT_DIR$/example-springboot-consumer/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">

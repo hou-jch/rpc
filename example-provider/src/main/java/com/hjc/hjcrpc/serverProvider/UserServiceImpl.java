@@ -2,10 +2,14 @@ package com.hjc.hjcrpc.serverProvider;
 
 import com.hjc.example.common.model.User;
 import com.hjc.example.common.service.UserService;
+import com.hjc.hjcrpc.springboot.starter.annotation.RpcService;
+import org.springframework.stereotype.Service;
 
 /**
  * 用户服务实现类
  */
+@Service
+@RpcService
 public class UserServiceImpl implements UserService {
     @Override
     public User getUser(User user) {
